@@ -12,7 +12,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",Ro
 .side{background:var(--panel);border-right:1px solid var(--line);padding:16px;position:sticky;top:0;height:100vh;overflow:auto}
 .side h1{font-size:15px;margin:8px 0 2px;color:var(--ink)}.side small{color:var(--mut)}
 .side img{width:100%;max-width:190px;display:block}
-.side input{width:100%;margin:12px 0;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.side input{width:100%;margin:10px 0 12px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
 .it{display:block;width:100%;text-align:left;padding:8px 10px;border:0;border-left:3px solid transparent;background:none;color:var(--ink);cursor:pointer;border-radius:6px;font:inherit}
 .it small{display:block;color:var(--mut);font-size:11px}.it:hover{background:var(--bg)}.it.on{background:var(--bg);border-left-color:var(--acc2);font-weight:600}
 main{padding:16px;min-width:0}
@@ -35,7 +35,7 @@ ol.l{margin:0;padding-left:20px}ol.l li{padding:1.5px 0}
 table{width:100%;border-collapse:collapse}td{border:1px solid #cfd6e6;padding:4px 8px}
 .xc{width:44px;text-align:center;font-weight:700;color:#1f2f5c}.edm .xc{cursor:pointer;background:#f3f6fc}
 .exp td{text-align:center}.exp .h td{background:#e8edf7;font-weight:700;color:#1f2f5c;font-size:11px}
-.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;text-align:center}
+.sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:30px;text-align:center}.sg>div{min-width:0;overflow-wrap:anywhere}
 .sg .ln{border-top:1px solid #1a1f2e;margin-top:34px;padding-top:4px}.sg b{color:#1f2f5c;letter-spacing:.1em}
 .ed{outline:none;border-radius:3px}.edm .ed{background:#fff8dc;box-shadow:0 0 0 1px #e6d58a;min-width:20px;display:inline-block}.edm div.ed,.edm p.ed{display:block}
 .x,.add{border:0;background:none;cursor:pointer;font:inherit}.x{color:#c0392b;font-weight:700;margin-left:6px}.add{color:#2f6fb5;font-size:12px;margin-top:3px;padding:0}
@@ -43,16 +43,16 @@ table{width:100%;border-collapse:collapse}td{border:1px solid #cfd6e6;padding:4p
 .ad h3{margin:0 0 4px}.ad p{margin:0 0 10px;color:var(--mut)}.ad img{max-width:100%;max-height:420px;border-radius:8px;display:block;margin:12px 0}
 #adp{display:none}
 .toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#1f2f5c;color:#fff;padding:8px 14px;border-radius:8px;display:none}
-@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border:0;border-bottom:1px solid var(--line)}.sheet{padding:16px}.g,.two{grid-template-columns:1fr}.c2{columns:1}.hd{grid-template-columns:90px 1fr}.hd img{width:90px}.hd>span{display:none}.sg{grid-template-columns:1fr}#lst{max-height:180px;overflow:auto}}
+@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border:0;border-bottom:1px solid var(--line)}.sheet{padding:16px}.g,.two{grid-template-columns:1fr}.c2{columns:1}.hd{grid-template-columns:90px 1fr}.hd img{width:90px}.hd>span{display:none}.sg{gap:8px;font-size:10.5px}.sg b{letter-spacing:.04em}#lst{max-height:180px;overflow:auto}}
 @page{size:A4;margin:10mm}
 @media print{html,body{background:#fff}.app{display:block}.side,.bar,.ad,.add,.x,.toast{display:none!important}main{padding:0}.sheet{border:0;box-shadow:none;padding:0;max-width:none;font-size:11px}
 body[data-pm=anuncio] .sheet{display:none}body[data-pm=anuncio] #adp{display:flex;justify-content:center;align-items:center;height:270mm}body[data-pm=anuncio] #adp img{max-width:100%;max-height:100%}
-.sec,.sub{break-after:avoid}.sg,table,.f{break-inside:avoid}.edm .ed{background:none!important;box-shadow:none!important}}
+.sec,.sub{break-after:avoid}.sg,table,.f{break-inside:avoid}.sg{grid-template-columns:repeat(3,minmax(0,1fr))!important}.edm .ed{background:none!important;box-shadow:none!important}}
 </style></head><body>
 <div class="app">
-<aside class="side"><img id="lg" alt="DAE Ingeniería"><h1>Perfiles de puesto 2026</h1><small id="cnt"></small><input id="q" placeholder="Buscar puesto…"><div id="lst"></div></aside>
+<aside class="side"><img id="lg" alt="DAE Ingeniería"><h1>Perfiles de puesto 2026</h1><small id="cnt"></small><button class="btn p" id="bnew2" style="width:100%;margin-top:10px">➕ Nuevo puesto</button><input id="q" placeholder="Buscar puesto…"><div id="lst"></div></aside>
 <main>
-<div class="bar"><button class="btn" id="be">✏️ Editar</button><span class="sp"></span><button class="btn p" id="bp">🖨️ Imprimir perfil</button><button class="btn" id="br" title="Restaura este perfil al original del Excel">Restaurar</button></div>
+<div class="bar"><button class="btn" id="be">✏️ Editar</button><button class="btn" id="bnew">➕ Nuevo puesto</button><button class="btn" id="bdup">⧉ Duplicar</button><button class="btn" id="bdel">🗑 Eliminar</button><span class="sp"></span><button class="btn p" id="bp">🖨️ Imprimir perfil</button><button class="btn" id="br" title="Restaura este perfil al original del Excel">Restaurar</button></div>
 <div class="sheet" id="sh"></div>
 <section class="ad"><h3>Imagen del anuncio de vacante</h3><p>Adjunta la imagen que se publicará para contratar a este puesto.</p>
 <input type="file" id="fi" accept="image/*" hidden><button class="btn" id="ba">📎 Adjuntar imagen</button> <button class="btn" id="bx">Quitar</button> <button class="btn p" id="bn">🖨️ Imprimir anuncio</button>
@@ -65,6 +65,7 @@ const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>(
 let P,cur=0,edit=false,ads={};
 try{P=JSON.parse(localStorage.getItem('dae_p1'))}catch(e){}
 if(!Array.isArray(P)||!P.length)P=JSON.parse(JSON.stringify(ORIG));
+P.forEach((p,i)=>{if(!p.sheet)p.sheet='p'+Date.now()+i});
 try{ads=JSON.parse(localStorage.getItem('dae_ad1')||'{}')}catch(e){ads={}}
 const save=()=>{try{localStorage.setItem('dae_p1',JSON.stringify(P))}catch(e){}};
 const toast=m=>{const t=$('#ts');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2800)};
@@ -93,7 +94,7 @@ return `<div class="hd"><img src="${LOGO}" alt=""><div><b>MANUAL DE ORGANIZACIÓ
 <div class="sec">CONDICIONES DE PUESTO</div>${lst('condiciones',p.condiciones)}
 <div class="sg">${p.firmas.map((f,i)=>`<div><b>${esc(f.rol)}</b><div class="ln">${ed('firmas|'+i+'|nombre',f.nombre,'div')}${ed('firmas|'+i+'|cargo',f.cargo,'div')}</div></div>`).join('')}</div>`}
 function side(){const q=$('#q').value.toLowerCase();$('#lst').innerHTML=P.map((p,i)=>[p,i]).filter(([p])=>(p.puesto+p.hdr['CÓDIGO DEL CARGO']).toLowerCase().includes(q)).map(([p,i])=>`<button class="it ${i==cur?'on':''}" data-i="${i}">${esc(p.puesto)}<small>${esc(p.hdr['CÓDIGO DEL CARGO']||'')} · ${esc(p.hdr['DEPARTAMENTO']||'')}</small></button>`).join('');$('#cnt').textContent=P.length+' perfiles'}
-function ad(){const a=ads[cur];$('#pv').innerHTML=a?`<img src="${a}" alt="Anuncio">`:'';$('#adp').innerHTML=a?`<img src="${a}" alt="">`:'';$('#bx').style.display=$('#bn').style.display=a?'':'none'}
+function ad(){const a=ads[P[cur]&&P[cur].sheet];$('#pv').innerHTML=a?`<img src="${a}" alt="Anuncio">`:'';$('#adp').innerHTML=a?`<img src="${a}" alt="">`:'';$('#bx').style.display=$('#bn').style.display=a?'':'none'}
 function render(){$('#sh').innerHTML=sheet();$('#sh').classList.toggle('edm',edit);$('#be').textContent=edit?'✔ Terminar edición':'✏️ Editar';$('#be').classList.toggle('on',edit);side();ad()}
 $('#lg').src=LOGO;
 document.addEventListener('input',e=>{const el=e.target.closest('[data-p]');if(!el)return;const k=key(el.dataset.p),l=k.pop();walk(P[cur],k)[l]=el.textContent;save()});
@@ -109,9 +110,17 @@ $('#q').oninput=side;
 $('#be').onclick=()=>{edit=!edit;render()};
 const pr=m=>{document.body.dataset.pm=m;setTimeout(()=>{window.print();setTimeout(()=>delete document.body.dataset.pm,400)},50)};
 $('#bp').onclick=()=>pr('perfil');$('#bn').onclick=()=>pr('anuncio');
-$('#br').onclick=()=>{if(confirm('¿Restaurar este perfil a su versión original del Excel? Se perderán tus cambios en este puesto.')){P[cur]=JSON.parse(JSON.stringify(ORIG[cur]));save();render()}};
+$('#br').onclick=()=>{if(confirm('¿Restaurar este perfil a su versión original del Excel? Se perderán tus cambios en este puesto.')){const o=ORIG.find(x=>x.sheet===P[cur].sheet);if(!o){toast('Este puesto es nuevo: no tiene versión original del Excel.');return}P[cur]=JSON.parse(JSON.stringify(o));save();render()}};
 $('#ba').onclick=()=>$('#fi').click();
-$('#fi').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const s=Math.min(1,1400/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);ads[cur]=c.toDataURL('image/jpeg',.85);try{localStorage.setItem('dae_ad1',JSON.stringify(ads))}catch(x){toast('Imagen cargada, pero no cabe en el almacenamiento del navegador: no se guardará al cerrar.')}ad()};i.src=r.result};r.readAsDataURL(f);e.target.value=''};
-$('#bx').onclick=()=>{delete ads[cur];try{localStorage.setItem('dae_ad1',JSON.stringify(ads))}catch(x){}ad()};
+$('#fi').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const s=Math.min(1,1400/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);ads[P[cur].sheet]=c.toDataURL('image/jpeg',.85);try{localStorage.setItem('dae_ad1',JSON.stringify(ads))}catch(x){toast('Imagen cargada, pero no cabe en el almacenamiento del navegador: no se guardará al cerrar.')}ad()};i.src=r.result};r.readAsDataURL(f);e.target.value=''};
+$('#bx').onclick=()=>{delete ads[P[cur].sheet];try{localStorage.setItem('dae_ad1',JSON.stringify(ads))}catch(x){}ad()};
+
+const today=()=>{const d=new Date();return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()};
+function blank(){const b=P[0]||ORIG[0];return{sheet:'p'+Date.now(),puesto:'NUEVO PUESTO',hdr:{'DEPARTAMENTO':'','CÓDIGO DEL CARGO':'','TIPO DE PUESTO':'','TIPO DE JORNADA':'T.COMPLETO','DEPENDE DE':'','SUPERVISA A':'','EDAD PARA CONTRATACIÓN':'','GÉNERO':'','RANGO DE SALARIO':''},objetivo:'Describe el objetivo del puesto.',funciones:['Función principal del puesto.'],otras:'Otras actividades orientadas por el superior inmediato o requeridas por el nivel de responsabilidad del puesto.',educacion:b.educacion.map(e=>({nivel:e.nivel,x:false,area:''})),exp_labels:[...b.exp_labels],exp_vals:['','','',''],exp_obs_label:'OBSERV.',exp_obs:'',generales:[''],seguridad:[''],tecnicas:[''],conductuales:[''],certificaciones:[''],capacitacion:[''],condiciones:[''],firmas:JSON.parse(JSON.stringify(b.firmas)),fecha_elab:today(),fecha_rev:'',departamento_hdr:b.departamento_hdr,elaborado_por:b.elaborado_por}}
+function addP(p,msg){P.push(p);cur=P.length-1;edit=true;$('#q').value='';save();render();scrollTo(0,0);toast(msg)}
+const nuevo=()=>addP(blank(),'Puesto nuevo creado: llena los campos y pulsa "Terminar edición".');
+$('#bnew').onclick=$('#bnew2').onclick=nuevo;
+$('#bdup').onclick=()=>{const c=JSON.parse(JSON.stringify(P[cur]));c.sheet='p'+Date.now();c.puesto=c.puesto+' (COPIA)';c.hdr['CÓDIGO DEL CARGO']='';addP(c,'Perfil duplicado: ajusta lo que cambie.')};
+$('#bdel').onclick=()=>{if(P.length<2)return;if(confirm('¿Eliminar el perfil "'+P[cur].puesto+'"? Esta acción no se puede deshacer.')){delete ads[P[cur].sheet];try{localStorage.setItem('dae_ad1',JSON.stringify(ads))}catch(x){}P.splice(cur,1);cur=Math.max(0,cur-1);save();render()}};
 render();
 </script></body></html>
